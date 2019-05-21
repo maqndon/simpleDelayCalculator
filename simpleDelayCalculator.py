@@ -4,26 +4,6 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
 
-#data from
-#http://www.sengpielaudio.com/calculator-bpmtempotime.htm
-# 60,000 ms (1 minute) / Tempo (BPM) = Delay Time in ms for quarter-note beats
-
-#60,000 / 120 BPM = 500 ms
-#60,000 / 750 ms = 80 BPM
-#60,000 / 96 BPM = 625 ms
-#60,000 / 833.333 ms = 72 BPM
-
-#Calculation of the delay timet for a quarter note (crotchet) at the tempo b in bpm.
-#t = 1 / b. Therefore: 1 min / 96 = 60,000 ms / 96 = 625 ms.
-#
-#1/4 = quarter-note echo
-#1/8 = eighth-note echo
-#1/8T = eighth-note triplet echo
-#1/16 = sixteenth-note echo
-#Example: Song tempo is 120 BPM.
-#Set delay time to 250 for eighth note echo.
-#Conversion Tempo to Beats per minute • Delay values to the nearest millisecond.
-
 ms=60000;
 
 #notes to calculate
