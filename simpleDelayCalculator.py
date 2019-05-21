@@ -4,6 +4,26 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
 
+#data from
+#http://www.sengpielaudio.com/calculator-bpmtempotime.htm
+# 60,000 ms (1 minute) / Tempo (BPM) = Delay Time in ms for quarter-note beats
+
+#60,000 / 120 BPM = 500 ms
+#60,000 / 750 ms = 80 BPM
+#60,000 / 96 BPM = 625 ms
+#60,000 / 833.333 ms = 72 BPM
+
+#Calculation of the delay timet for a quarter note (crotchet) at the tempo b in bpm.
+#t = 1 / b. Therefore: 1 min / 96 = 60,000 ms / 96 = 625 ms.
+#
+#1/4 = quarter-note echo
+#1/8 = eighth-note echo
+#1/8T = eighth-note triplet echo
+#1/16 = sixteenth-note echo
+#Example: Song tempo is 120 BPM.
+#Set delay time to 250 for eighth note echo.
+#Conversion Tempo to Beats per minute • Delay values to the nearest millisecond.
+
 ms=60000;
 
 #notes to calculate
@@ -19,6 +39,7 @@ notes = {
     "32th Note":0.125,
     "64th Note":0.0625
 }
+
 layout = [[sg.Text('Beats per Minute (BPM)', size=(18, 1)),sg.Text('Note value of delay', size=(20, 1)),sg.Text('Delay time (milliseconds)', size=(20, 1))],
           [sg.Input([],size=(20, 3), key='_bpm_'),sg.InputCombo(['','Four whole notes', 'Three whole notes', 'Two whole notes', 'One whole notes', 'Half Note', 'Quarter Note', 'eighth note', '16th Note', '32th Note', '64th Note'], size=(20, 3), key='_note_'), sg.Input([],size=(20, 3), key='_delay_',text_color='black')],
           [sg.RButton('Calculate Delay Time'), sg.Exit()]]
@@ -32,7 +53,9 @@ while True:
         break
 
     try:
-        window.Element('_delay_').Update(value =(ms/int(values['_bpm_']))*notes[values['_note_']])
+        eq=ms/int(values['_bpm_'])
+        nota=notes[values['_note_']]
+        window.Element('_delay_').Update(value =eq*nota)
     except ValueError: 
         window.Element('_delay_').Update(value ='Please Only Integer')
     except:
