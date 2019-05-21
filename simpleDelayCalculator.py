@@ -26,8 +26,6 @@ else:
 
 ms=60000;
 
-print = sg.Print
-
 #notes to calculate
 notes = {
     "Four whole notes":16,
@@ -41,11 +39,6 @@ notes = {
     "32th Note":0.125,
     "64th Note":0.0625
 }
-
-def notesCombo():
-    for note in notes:
-        return (note)
-
 layout = [[sg.Text('Beats per Minute (BPM)', size=(18, 1)),sg.Text('Note value of delay', size=(20, 1)),sg.Text('Delay time (milliseconds)', size=(20, 1))],
           [sg.Input([],size=(20, 3), key='_bpm_'),sg.InputCombo(['','Four whole notes', 'Three whole notes', 'Two whole notes', 'One whole notes', 'Half Note', 'Quarter Note', 'eighth note', '16th Note', '32th Note', '64th Note'], size=(20, 3), key='_note_'), sg.Input([],size=(20, 3), key='_delay_',text_color='black')],
           [sg.RButton('Calculate Delay Time'), sg.Exit()]]
